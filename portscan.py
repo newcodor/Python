@@ -4,7 +4,7 @@
 """
 -------------------------------------------
 Date：2019-1-1
-Description: 多线程扫描器的开发
+Description: 基于Queue实现线程安全的多线程扫描器的研究
 Case:
     port scope:5000-10000
     speed time:154.0s
@@ -35,10 +35,10 @@ def main():
         x.join()
 
     print("\n------------------------------")
-    open_ports=list(set(open_port))
-    if len(open_ports)>0:
-        print("open ports count: "+str(len(open_ports)))
-        for x in open_ports:
+    open_port.sort()
+    if len(open_port)>0:
+        print("open ports count: "+str(len(open_port)))
+        for x in open_port:
             print(x)
             pass
     else:
