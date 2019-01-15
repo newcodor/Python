@@ -4,6 +4,13 @@
 Author:  newcodor
 Time: 2019-1-14
 Description:模拟http请求
+  采用HTTP/1.1协议，使用长连接，添加Connection: keep-alive,
+  reponse响应头中存在Transfer-Encoding: chunked时，使用chuck通常是
+  服务器端开启了gzip压缩，这是需要
+  根据 \r\n0\r\n 判断数据传输结束，这是在无法判断响应消息传输长度的情况下使用，
+  要么是Content-Length来判断，但这种方式通常浏览器使用的更多；
+  这两种方式在HTTP/1.1中只能选其一，但在HTTP/1.0中，有无Content-Length均可，
+
 '''
 import socket
 
@@ -26,10 +33,21 @@ def main():
 def connect(method,uri,host,port=80):
     sc=socket.socket()
     method=method.upper()
+    # ip="127.0.0.1"
     ip=socket.gethostbyname(host)
     if not sc.connect_ex((ip,port)):
         sc.send(method+" "+uri+" HTTP/1.1\r\nHost: "+host+"\r\nConnection: keep-alive\r\n\r\n")
-        print(sc.recv(1024*100000))
+        with open(r"./"+host+".txt","w+") as f:
+            while True:
+                data=sc.recv(10240)
+                if "\r\n0\r\n" in data:
+                    f.write(data)
+                    break
+                else:
+                    f.write(data)
+                    # print(data)
+                pass
+            f.close()
         print("send ok！")
     else:
         print("连接失败!")
