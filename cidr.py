@@ -4,6 +4,7 @@
 #cidr calculator
 
 import copy
+import argparse
 
 def getIpListFromStr(ipStr):
     return [int(ipStr[i:i+8],2) for  i in range(0,len(ipStr),8)]
@@ -44,7 +45,13 @@ def cidrToScope(cidr):
         for i in range(pos+1,len(mask)):
             mask[i]=0
         # print(mask)
-        return mask,network,broadcastAddr,firstAddr,endAddr
+        return {
+            "mask":mask,
+            "network":network,
+            "broadcastAddr":broadcastAddr,
+            "firstAddr":firstAddr,
+            "endAddr":endAddr,
+            }
     pass
 
 # check ip is in cidr
@@ -61,4 +68,8 @@ def main():
     pass
 
 if __name__ == '__main__':
-    main()
+    parser =  argparse.ArgumentParser()
+    parser.add_argument('-a', '--addr ', dest='addr', help='ip cidr')
+    args = parser.parse_args()
+    if args.addr:
+        print(cidrToScope(args.addr))
