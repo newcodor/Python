@@ -30,15 +30,15 @@ def send_click(x,y):
 
 
 
-def meituan():
+def meituan(x,y):
     print("start monitor ....")
     while True:
         current_time = get_strftime()
-        if current_time == "2023-10-18 11:00:00":
+        if current_time == "2023-10-18 17:00:00":
             time.sleep(0.1)
             for i in range(0,15):
                 time.sleep(0.1)
-                click(860.7,1143.8)
+                click(x,y)
             print("\n")
             print(get_strftime())
             break
@@ -63,6 +63,9 @@ if __name__ == "__main__":
     # china_12306_action_group=[(824.1,1452.4,0.7),(265.6,987.6,0.5),(776,589.7,0),(990.3,147.7,0.5),(854.6,1473.9,0.4),(448,1898,0)]
     # china_12306_action_group=[(824.1,1452.4,0.7),(265.6,987.6,0.5),(776,589.7,0),(990.3,147.7,0.5),(854.6,1473.9,0.4)]
     # action_chain(china_12306_action_group)
-    meituan()
+    # 周一、二:26-18
+    meituan(860.7,1143.8)
+    # 每月18： 38-18
+    # meituan(851.6,1373.6)
     # test_jd((987.7,733.4))
     # click(860.7,1143.8)
