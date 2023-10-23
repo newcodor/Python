@@ -31,10 +31,13 @@ def send_click(x,y):
 
 
 def meituan(x,y):
+    today_date=get_strftime().split(" ")[0]
+    trigger_time=f"{today_date} 10:00:00"
+    print("trigger_time:",trigger_time)
     print("start monitor ....")
     while True:
         current_time = get_strftime()
-        if current_time == "2023-10-18 17:00:00":
+        if current_time == trigger_time:
             time.sleep(0.1)
             for i in range(0,15):
                 time.sleep(0.1)
