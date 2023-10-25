@@ -38,10 +38,10 @@ def meituan(x,y):
     while True:
         current_time = get_strftime()
         if current_time == trigger_time:
-            time.sleep(0.1)
+            time.sleep(0.05)
             for i in range(0,15):
-                time.sleep(0.1)
                 click(x,y)
+                time.sleep(0.1)
             print("\n")
             print(get_strftime())
             break
